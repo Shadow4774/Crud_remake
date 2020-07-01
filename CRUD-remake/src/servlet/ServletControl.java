@@ -59,6 +59,10 @@ public class ServletControl extends HttpServlet{
 		case "edit":
 			editUser(request, response);
 			break;
+			
+		case "update":
+			updateUser(request, response);
+			break;
 		default:
 			forward(request, response, "/index.html");
 			break;
@@ -85,6 +89,13 @@ public class ServletControl extends HttpServlet{
 		Optional<User> existingUser = DBActions.find(id);
 		existingUser.ifPresent(s -> request.setAttribute("user", s));
 		forward(request, response, "/editUser.jsp");
+	}
+	
+	private void updateUser(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		DBActions.editUser(request, response);
+		request.setAttribute("users", DBActions.getAll());
+		forward(request, response, "/listAll.jsp");
 	}
 	
 	private void forward(HttpServletRequest request, HttpServletResponse response, String page) throws ServletException, IOException {

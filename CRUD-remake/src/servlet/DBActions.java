@@ -78,7 +78,7 @@ public class DBActions {
 		return deleted;
 	}
 	
-	public static boolean EditUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+	public static boolean editUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		int id = Integer.parseInt( request.getParameter("id"));
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
