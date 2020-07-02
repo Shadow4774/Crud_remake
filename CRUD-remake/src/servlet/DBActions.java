@@ -124,6 +124,25 @@ public class DBActions {
 		return Optional.of(new User(id_i, name, surname, bDate, null, age, type));
 	}
 	
+	public static int getIdForNameSurname(String name, String surname) throws SQLException {
+		String sql = "SELECT id FROM crud_users WHERE name LIKE ? AND surname LIKE ?";
+		int id = 0, rows = 0;
+		
+		Connection conn = ConnHelper.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, name);
+		statement.setString(1, surname);
+		ResultSet rs = statement.executeQuery();
+		
+		if(rs.last()) {
+			rows = rs.getRow();
+			if(rows == 1)
+				id = rs.getInt("id");
+		}
+		
+		return id;
+	}
+	
 	private static int getAge(Date date) {
 		LocalDate now = LocalDate.now();
 		LocalDate bDate = date.toLocalDate();

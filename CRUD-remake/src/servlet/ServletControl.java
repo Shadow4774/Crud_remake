@@ -63,6 +63,7 @@ public class ServletControl extends HttpServlet{
 		case "update":
 			updateUser(request, response);
 			break;
+			
 		default:
 			forward(request, response, "/index.html");
 			break;

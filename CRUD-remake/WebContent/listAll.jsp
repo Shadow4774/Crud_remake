@@ -12,6 +12,7 @@
 		<thead>
 			<tr>
 				<th>NO</th>
+				<th>Id</th>
 				<th>Name</th>
 				<th>Surname</th>
 				<th>Birthdate</th>
@@ -27,6 +28,7 @@
 				<c:set var="count" value="${count + 1 }" scope="page" />
 				<tr>
 					<td><c:out value="${count }" /></td>
+					<td><c:out value="${user.id }" /></td>
 					<td><c:out value="${user.name }" /></td>
 					<td><c:out value="${user.surname }" /></td>
 					<td><c:out value="${user.birthDate }" /></td>
