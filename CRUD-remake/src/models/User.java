@@ -14,8 +14,8 @@ public class User {
 	private int id;
 	private String name;
 	private String surname;
-	private Date birthDate;
-	private Timestamp creationTimestamp;
+	private Date birthDate;					//This is the sql Date
+	private Timestamp creationTimestamp;	//This is the sql Timestamp
 	private int age;
 	private eType type;
 	
@@ -71,11 +71,44 @@ public class User {
 		this.type = type;
 	}
 	
+	/**
+	 * Converts the birthdate into the string parseable by default by the database
+	 * @return Birthdate as yyyy-MM-dd
+	 */
 	public String getStandardDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(birthDate);
 	}
 	
+	/**
+	 * Converts the user type into a 1-letter String accepted by the database
+	 * @return 1-letter string equivalent to the type
+	 */
+	public String getTypeString() {
+		String ret = "";
+		switch (type) {
+		case OWNER:
+			ret = "O";
+			break;
+			
+		case SPOUSE:
+			ret = "S";
+			break;
+			
+		case CHILD:
+			ret = "C";
+			break;
+		default:
+			break;
+		}
+		return ret;
+	}
+	
+	/**
+	 * Convert the 1-letter type from the database to the equivalent user type
+	 * @param chr 1-letter string for the DB user type
+	 * @return enum for the java user type
+	 */
 	public static eType charStrToEnum(String chr) {
 		if(chr.length() != 1)
 			return null;

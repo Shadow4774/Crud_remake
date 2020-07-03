@@ -35,6 +35,14 @@ public class ServletControl extends HttpServlet{
 		}
 	}
 	
+	/**
+	 * Main switch hub, that identifies the operation required and forwards to the correct page
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 * @throws ServletException
+	 * @throws SQLException
+	 */
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException {
 		String op = request.getParameter("op");
 		
@@ -70,6 +78,14 @@ public class ServletControl extends HttpServlet{
 		}
 	}
 
+	/**
+	 * Inner forwarder for deleting users
+	 * @param request
+	 * @param response
+	 * @throws SQLException
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		DBActions.deleteUser(request, response);
@@ -77,6 +93,14 @@ public class ServletControl extends HttpServlet{
 		forward(request, response, "/listAll.jsp");
 	}
 
+	/**
+	 * Inner forwarder for inserting users into DB
+	 * @param request
+	 * @param response
+	 * @throws SQLException
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void insertUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		DBActions.insertUser(request, response);
@@ -84,6 +108,14 @@ public class ServletControl extends HttpServlet{
 		forward(request, response, "/listAll.jsp");
 	}
 	
+	/**
+	 * Inner forwarder for receiving data to edit users
+	 * @param request
+	 * @param response
+	 * @throws SQLException
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void editUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		String id = request.getParameter("id");
@@ -92,6 +124,14 @@ public class ServletControl extends HttpServlet{
 		forward(request, response, "/editUser.jsp");
 	}
 	
+	/**
+	 * Inner forwarder for updating users
+	 * @param request
+	 * @param response
+	 * @throws SQLException
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void updateUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		DBActions.editUser(request, response);

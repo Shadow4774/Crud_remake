@@ -20,7 +20,12 @@ import models.User.eType;
 
 public class DBActions {
 
-	protected static List<User> getAll() throws SQLException {
+	/**
+	 * Fetch from the DB a list of all users in the default table
+	 * @return List of all users
+	 * @throws SQLException
+	 */
+	public static List<User> getAll() throws SQLException {
 		List<User> list = new ArrayList<User>();
 		String sql = "SELECT id, name, surname, birthdate, creationTimeStamp, age, type FROM crud_users";
 		
@@ -44,7 +49,14 @@ public class DBActions {
 		return list;
 	}
 	
-	protected static boolean insertUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+	/**
+	 * Servlet for extracting user data from HttpServletRequest and adding the new user to the DB
+	 * @param request
+	 * @param response
+	 * @return True if user was added, False otherwise
+	 * @throws SQLException
+	 */
+	public static boolean insertUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
 		Date birth = Date.valueOf(request.getParameter("birth"));
@@ -52,6 +64,39 @@ public class DBActions {
 		Timestamp now = new Timestamp((new java.util.Date()).getTime());
 		int age = getAge(birth);
 		
+		return innerInsertUser(name, surname, birth, type, now, age);
+	}
+	
+	/**
+	 * Servlet for extracting user data from java User entity and adding the new user to the DB
+	 * @param user Java User entity to add
+	 * @return True if user was added, False otherwise
+	 * @throws SQLException
+	 */
+	public static boolean insertUser(User user) throws SQLException {
+		String name = user.getName();
+		String surname = user.getSurname();
+		Date birth = user.getBirthDate();
+		String type = user.getTypeString();
+		Timestamp now = new Timestamp((new java.util.Date()).getTime());
+		int age = getAge(birth);
+		
+		return innerInsertUser(name, surname, birth, type, now, age);
+	}
+
+	/**
+	 * Inner function that creates the sql string and sends it to the DB
+	 * @param name
+	 * @param surname
+	 * @param birth
+	 * @param type
+	 * @param now
+	 * @param age
+	 * @return True if user was added, False otherwise
+	 * @throws SQLException
+	 */
+	private static boolean innerInsertUser(String name, String surname, Date birth, String type, Timestamp now, int age)
+			throws SQLException {
 		boolean inserted=false;
 		String sql = "INSERT into crud_users (name, surname, birthdate, creationtimestamp, age, type) VALUES (?, ?, ?, ?, ?, ?)";
 		Connection conn = ConnHelper.getConnection();
@@ -67,8 +112,36 @@ public class DBActions {
 		return inserted;
 	}
 	
+	/**
+	 * Servlet for extracting user id from HttpServletRequest and deleting the user from the DB
+	 * @param request
+	 * @param response
+	 * @return True if user was deleted, False otherwise
+	 * @throws SQLException
+	 */
 	public static boolean deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		int id = Integer.parseInt(request.getParameter("id"));
+		return innerDeleteUser(id);
+	}
+	
+	/**
+	 * Servlet for extracting user id from java User entity and deleting the user from the DB
+	 * @param user
+	 * @return True if user was deleted, False otherwise
+	 * @throws SQLException
+	 */
+	public static boolean deleteUser(User user) throws SQLException {
+		int id = user.getId();
+		return innerDeleteUser(id);
+	}
+
+	/**
+	 * Inner function that creates the sql string and sends it to the DB
+	 * @param id Id to delete
+	 * @return True if user was deleted, False otherwise
+	 * @throws SQLException
+	 */
+	private static boolean innerDeleteUser(int id) throws SQLException {
 		String sql = "DELETE FROM crud_users WHERE id = ?";
 		Connection conn = ConnHelper.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
@@ -78,6 +151,13 @@ public class DBActions {
 		return deleted;
 	}
 	
+	/**
+	 * Servlet for extracting user data from HttpServletRequest and changing the user on the DB
+	 * @param request
+	 * @param response
+	 * @return True if user was changed, False otherwise
+	 * @throws SQLException
+	 */
 	public static boolean editUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		int id = Integer.parseInt( request.getParameter("id"));
 		String name = request.getParameter("name");
@@ -101,6 +181,12 @@ public class DBActions {
 		return inserted;
 	}
 	
+	/**
+	 * Function to find an user given the Id
+	 * @param id Id to search
+	 * @return The user, if found
+	 * @throws SQLException
+	 */
 	public static Optional<User> find(String id) throws SQLException {
 		String sql = "SELECT id, name, surname, birthdate, type FROM crud_users WHERE id = ?";
 		String name = "", surname = "";
@@ -124,25 +210,45 @@ public class DBActions {
 		return Optional.of(new User(id_i, name, surname, bDate, null, age, type));
 	}
 	
+	/**
+	 * Function to find the Id of an user given name and surname
+	 * @param name Name to search
+	 * @param surname Surname to search
+	 * @return 0 = record not found, -1 = multiple records found, otherwise = id of user
+	 * @throws SQLException
+	 */
 	public static int getIdForNameSurname(String name, String surname) throws SQLException {
 		String sql = "SELECT id FROM crud_users WHERE name LIKE ? AND surname LIKE ?";
-		int id = 0, rows = 0;
+		int id = 0;
+//		int rows = 0;
 		
 		Connection conn = ConnHelper.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, name);
-		statement.setString(1, surname);
+		statement.setString(2, surname);
 		ResultSet rs = statement.executeQuery();
-		
+		//
+		while (rs.next()) {
+			if(id == 0)					//id == 0 is the starting situation (first line)
+				id = rs.getInt("id");
+			else						//id != 0 means that there are more than 1 record with same name/surname
+				id = -1;
+		}
+		/*/
 		if(rs.last()) {
 			rows = rs.getRow();
 			if(rows == 1)
 				id = rs.getInt("id");
 		}
-		
-		return id;
+		//*/
+		return id;						//0 = record not found, -1 = multiple records found, otherwise = id of user
 	}
 	
+	/**
+	 * Given the birthdate, returns the age now
+	 * @param date Birthdate
+	 * @return age at this moment in time
+	 */
 	private static int getAge(Date date) {
 		LocalDate now = LocalDate.now();
 		LocalDate bDate = date.toLocalDate();
