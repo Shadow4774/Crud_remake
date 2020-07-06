@@ -27,7 +27,7 @@ public class JunitTests {
 		assertTrue(result);
 	}
 	
-	@Test
+	@Ignore
 	public void testDeleteUser() {
 		boolean result = false;
 		try {
