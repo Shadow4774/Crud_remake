@@ -146,8 +146,18 @@ public class ServletControl extends HttpServlet{
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String uname=request.getParameter("uname");
+		String pwd=request.getParameter("pwd");
+		if(uname.equals("crud")&& pwd.equals("0000"))
+		{
+			response.sendRedirect("LoginOK.jsp");
+		}
+		else
+		{
+			response.sendRedirect("ErrorLogin.jsp");
+		}
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		// doGet(request, response);
 	}
 	
 	
