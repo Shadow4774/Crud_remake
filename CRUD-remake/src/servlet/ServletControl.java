@@ -47,6 +47,10 @@ public class ServletControl extends HttpServlet{
 		String op = request.getParameter("op");
 		
 		switch (op) {
+		case "login":
+			showLogin(request, response);
+			break;
+		
 		case "list":
 			request.setAttribute("users", DBActions.getAll());
 			forward(request, response, "/listAll.jsp");
@@ -70,10 +74,6 @@ public class ServletControl extends HttpServlet{
 			
 		case "update":
 			updateUser(request, response);
-			break;
-			
-		case "login":
-			showLogin(request, response);
 			break;	
 			
 		default:
@@ -81,7 +81,32 @@ public class ServletControl extends HttpServlet{
 			break;
 		}
 	}
-
+	
+	/**
+	 * Inner forwarder for access with user to login page
+	 * @param request
+	 * @param response
+	 * @throws SQLException
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void showLogin(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		String uname=request.getParameter("uname");
+		String pwd=request.getParameter("pwd");
+		if(uname.equals("crud")&& pwd.equals("0000"))
+		{
+			//response.sendRedirect("index.html");
+			forward(request, response, "/index.html");
+		}
+		else
+		{
+			//response.sendRedirect("ErrorLogin.jsp");
+			forward(request, response, "/ErrorLogin.jsp");
+		}
+		
+	}
+	
 	/**
 	 * Inner forwarder for deleting users
 	 * @param request
@@ -111,20 +136,7 @@ public class ServletControl extends HttpServlet{
 		request.setAttribute("users", DBActions.getAll());
 		forward(request, response, "/listAll.jsp");
 	}
-	private void showLogin(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, ServletException, IOException {
-		String uname=request.getParameter("uname");
-		String pwd=request.getParameter("pwd");
-		if(uname.equals("crud")&& pwd.equals("0000"))
-		{
-			response.sendRedirect("index.html");
-		}
-		else
-		{
-			response.sendRedirect("ErrorLogin.jsp");
-		}
-		
-	}
+	
 	/**
 	 * Inner forwarder for receiving data to edit users
 	 * @param request
