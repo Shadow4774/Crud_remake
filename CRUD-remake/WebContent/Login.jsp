@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="LoginCheck">
+	<form method="post" action="ServletControl ">
+	<input type="hidden" name="op" value="login">
 		<table>
 			<tr>
 				<td>User Name</td>

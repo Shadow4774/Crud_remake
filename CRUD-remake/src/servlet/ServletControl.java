@@ -72,6 +72,10 @@ public class ServletControl extends HttpServlet{
 			updateUser(request, response);
 			break;
 			
+		case "login":
+			showLogin(request, response);
+			break;	
+			
 		default:
 			forward(request, response, "/index.html");
 			break;
@@ -107,7 +111,20 @@ public class ServletControl extends HttpServlet{
 		request.setAttribute("users", DBActions.getAll());
 		forward(request, response, "/listAll.jsp");
 	}
-	
+	private void showLogin(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		String uname=request.getParameter("uname");
+		String pwd=request.getParameter("pwd");
+		if(uname.equals("crud")&& pwd.equals("0000"))
+		{
+			response.sendRedirect("index.html");
+		}
+		else
+		{
+			response.sendRedirect("ErrorLogin.jsp");
+		}
+		
+	}
 	/**
 	 * Inner forwarder for receiving data to edit users
 	 * @param request
@@ -146,18 +163,8 @@ public class ServletControl extends HttpServlet{
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		String uname=request.getParameter("uname");
-		String pwd=request.getParameter("pwd");
-		if(uname.equals("crud")&& pwd.equals("0000"))
-		{
-			response.sendRedirect("LoginOK.jsp");
-		}
-		else
-		{
-			response.sendRedirect("ErrorLogin.jsp");
-		}
 		// TODO Auto-generated method stub
-		// doGet(request, response);
+		 doGet(request, response);
 	}
 	
 	
