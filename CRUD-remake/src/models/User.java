@@ -2,6 +2,9 @@ package models;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+
+import org.json.simple.JSONObject;
+
 import java.sql.Date;
 
 public class User {
@@ -18,6 +21,10 @@ public class User {
 	private Timestamp creationTimestamp;	//This is the sql Timestamp
 	private int age;
 	private eType type;
+	
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public User(int id, String name, String surname, Date birthDate, Timestamp creationTimestamp, int age, eType type) {
 		this.id = id;
@@ -78,6 +85,14 @@ public class User {
 	public String getStandardDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(birthDate);
+	}
+	
+	/**
+	 * Convert this User entity into the standard Json object
+	 * @return Json representation of current user
+	 */
+	public JSONObject getJsonObj() {
+		return JsonConverter.userToJson(this);
 	}
 	
 	/**
