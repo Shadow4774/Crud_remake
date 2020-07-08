@@ -101,6 +101,9 @@ public class User {
 	 */
 	public String getTypeString() {
 		String ret = "";
+		if(type == null)
+			return ret;
+		
 		switch (type) {
 		case OWNER:
 			ret = "O";
