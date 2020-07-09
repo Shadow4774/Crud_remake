@@ -1,14 +1,11 @@
 package junit;
 
 import static org.junit.Assert.*;
-
 import java.sql.Date;
 import java.sql.SQLException;
-
 import org.json.simple.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
-
 import models.User;
 import models.User.eType;
 import servlet.DBActions;

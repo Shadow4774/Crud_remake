@@ -83,7 +83,7 @@ public class ServletControl extends HttpServlet{
 			break;
 			
 		default:
-			forward(request, response, "/index.html");
+			forward(request, response, "/menu.jsp");
 			break;
 		}
 	}
