@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleLoginPage.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
  	<style type="text/css"><%@include file="/css/styleLoginPage.css" %></style>
   </head>

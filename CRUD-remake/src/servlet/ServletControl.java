@@ -103,7 +103,7 @@ public class ServletControl extends HttpServlet{
 		if(uname.equals("crud")&& pwd.equals("0000"))
 		{
 			//response.sendRedirect("index.html");
-			forward(request, response, "/index.html");
+			forward(request, response, "/menu.jsp");
 		}
 		else
 		{
