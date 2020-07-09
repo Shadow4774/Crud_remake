@@ -55,7 +55,7 @@
 
 								<div class="mdl.textfield mdl-js-textfield">
 								<label class="MDL-textfield - floating-label" for="date">date:</label>
-									<input class="mdl-textfield__input" type="date"
+									<input class=" mdl-textfield__input" type="date"
 												name="birth" value="2000-01-01"
 												id="birth" /><br>
 									
