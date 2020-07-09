@@ -227,20 +227,13 @@ public class DBActions {
 		statement.setString(1, name);
 		statement.setString(2, surname);
 		ResultSet rs = statement.executeQuery();
-		//
+		
 		while (rs.next()) {
 			if(id == 0)					//id == 0 is the starting situation (first line)
 				id = rs.getInt("id");
 			else						//id != 0 means that there are more than 1 record with same name/surname
 				id = -1;
 		}
-		/*/
-		if(rs.last()) {
-			rows = rs.getRow();
-			if(rows == 1)
-				id = rs.getInt("id");
-		}
-		//*/
 		return id;						//0 = record not found, -1 = multiple records found, otherwise = id of user
 	}
 	
