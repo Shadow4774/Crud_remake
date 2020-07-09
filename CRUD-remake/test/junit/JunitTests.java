@@ -1,13 +1,11 @@
 package junit;
 
 import static org.junit.Assert.*;
-
 import java.sql.Date;
 import java.sql.SQLException;
-
+import org.json.simple.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
-
 import models.User;
 import models.User.eType;
 import servlet.DBActions;
@@ -43,4 +41,20 @@ public class JunitTests {
 		assertTrue(result);
 	}
 
+	@Test
+	public void testJson() {
+		User user = new User(1, "Name", "Surname", null, null, 18, null);
+		JSONObject json = user.getJsonObj();
+		String testString = "";
+		
+		testString = json.get("name").toString();
+		assertTrue("Name".equals(testString));
+		
+		testString = json.get("surname").toString();
+		assertTrue("Surname".equals(testString));
+		
+		testString = json.get("age").toString();
+		int testInt = Integer.parseInt(testString);
+		assertTrue(testInt == 18);
+	}
 }

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import models.User;
 
 @WebServlet("/ServletControl")
@@ -77,14 +79,19 @@ public class ServletControl extends HttpServlet {
 
 		case "update":
 			updateUser(request, response);
+			break;	
+			
+		case "json":
+			getJson(request, response);
 			break;
 
 		default:
-			forward(request, response, "/index.html");
+			forward(request, response, "/menu.jsp");
 			break;
 		}
 	}
-
+	
+	
 	/**
 	 * Inner forwarder for access with user to login page
 	 * 
@@ -173,8 +180,17 @@ public class ServletControl extends HttpServlet {
 		forward(request, response, "/listAll.jsp");
 	}
 
-	private void forward(HttpServletRequest request, HttpServletResponse response, String page)
-			throws ServletException, IOException {
+	
+	private void getJson(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		String id = request.getParameter("id");
+		JSONObject json = getJson(id);
+		request.setAttribute("json", json);
+		forward(request, response, "/listAll.jsp");	//TODO: redirect where???
+	}
+	
+	private void forward(HttpServletRequest request, HttpServletResponse response, String page) throws ServletException, IOException {
+
 		ServletContext sc = getServletContext();
 		RequestDispatcher rd = sc.getRequestDispatcher(page);
 		rd.forward(request, response);
@@ -182,7 +198,19 @@ public class ServletControl extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		 doGet(request, response);
+	}
+
+
+	
+	private JSONObject getJson(String id) throws SQLException {
+		JSONObject json = null;
+		
+		Optional<User> user = DBActions.find(id);
+		if(user.isPresent())
+			json = user.get().getJsonObj();
+		
+		return json;
 	}
 
 }

@@ -1,0 +1,26 @@
+@charset "ISO-8859-1";
+.box-center {
+	align-items: center;
+	justify-content: center;
+}
+
+.mdl-layout__content {
+	padding: 24px;
+	flex: none;
+}
+
+.demo-layout-transparent {
+	background-color: #000040;
+}
+
+.demo-layout-transparent 
+.mdl-layout__header,
+.demo-layout-transparent 
+.mdl-layout__drawer-button {
+	
+	color: white;
+}
+
+.mdl-grid.center-items {
+	justify-content: center;
+}
