@@ -117,10 +117,6 @@ public class ServletControl extends HttpServlet{
 		//*/
 		if(test)
 		{
-<<<<<<< HEAD
-			//response.sendRedirect("index.html");
-=======
->>>>>>> branch 'slave' of https://github.com/Shadow4774/Crud_remake.git
 			forward(request, response, "/menu.jsp");
 		}
 		else
