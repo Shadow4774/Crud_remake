@@ -1,0 +1,77 @@
+@charset "ISO-8859-1";
+
+@font-face {
+	font-family: 'Montserrat-Bold';
+	src: url('Montserrat-Bold.ttf') format('truetype');
+}
+
+
+.mainBox{
+	
+}
+
+.space {
+	height: 60px;
+	width: 100%;
+}
+
+.head {
+	background: linear-gradient(120deg,#3498db,#8e44ad);
+	height: 45px;
+	width: 100%;
+	
+}
+
+.line {
+	background: linear-gradient(120deg,#3498db,#8e44ad);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 55px;
+	
+}
+
+.space {
+	height: 60px;
+	width: 100%;
+}
+
+.words {
+	font-family:'Montserrat-Bold';
+	font-size: 16px;
+	color: white;
+	padding: 12px;
+}
+
+.block {
+	border : 1px solid black;
+	border-collapse: collapse;
+	font-family:'Montserrat-Bold';
+	font-size: 20px;
+	color: black;
+	height: 30px;
+	width: 250px;
+	border: 1px solid black;
+	
+}
+
+.t {
+	border: 1px solid black;
+	border-collapse: collapse;
+	
+}
+.date{
+	
+	color:white;
+	font-family: 'Montserrat-Bold';
+	font-size: 16px;
+	padding: 12px;
+	
+}
+
+.worder{
+	
+	color: white;
+}

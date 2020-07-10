@@ -1,53 +1,51 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
 <html lang="en">
-<head>
-<title>Users List</title>
-</head>
-<body>
-	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-		<%@include file="menu.jsp"%>
+<link href="css/listAllStyle.css" rel="stylesheet" type="text/css">
+<div class='mainBox'>
 
-		<main class="mdl-layout__content ">
-			<div class="page-content">
-				<div class="mdl-grid center-items">
-					<div class="mdl-cell mdl-cell--4-col">
-						<div>
-							<table
-								class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp ">
-								<thead>
-									<tr>
-										<th class="mdl-data-table_cell--non-numeric ">NO</th>
-										<th>Id</th>
-										<th>Name</th>
-										<th>Surname</th>
-										<th>Birthdate</th>
-										<th>Creation Timestamp</th>
-										<th>Age</th>
-										<th>Type</th>
-										<th>Operations</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:set var="count" value="0" scope="page" />
-									<c:forEach var="user" items="${users }">
-										<c:set var="count" value="${count + 1 }" scope="page" />
+	<div class='line'>
+
+		<a class='words' href="menu.jsp">Home Page</a> <a class='words'
+						href="newUser.jsp">Insert User</a>
+		<div class='date'>
+			<%
+				java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy hh:mm");
+			%>
+			<h5><%=df.format(new java.util.Date())%>
+			</h5>
+		</div>
+
+	</div>
+
+	<div class='space'></div>
+
+						<table class='t'>
+
+		<tr class='head'>
+			<th class='words'>Id</th>
+			<th class='words'>Name</th>
+			<th class='words'>Surname</th>
+			<th class='words'>BirthDate</th>
+			<th class='words'>Creation TimeStamp</th>
+			<th class='words'>Age</th>
+			<th class='words'>Type</th>
+			<th class='words'>Operation</th>
+		</tr>
+									
+								
+									<c:forEach items="${users}" var="user">
+										
 										<tr>
-
-											<td><c:out value="${count }" /></td>
-											<td><c:out value="${user.id }" /></td>
-											<td><c:out value="${user.name }" /></td>
-											<td><c:out value="${user.surname }" /></td>
-											<td><c:out value="${user.birthDate }" /></td>
-											<td><c:out value="${user.creationTimestamp }" /></td>
-											<td><c:out value="${user.age }" /></td>
-											<td><c:out value="${user.type }" /></td>
+											
+											<td class='block'>${user.id }</td>
+											<td class='block'>${user.name }</td>
+											<td class='block'>${user.surname }</td>
+											<td class='block'>${user.birthDate }</td>
+											<td class='block'>${user.creationTimestamp }</td>
+											<td class='block'>${user.age}</td>
+											<td class='block'>${user.type}</td>
 											<td><a
 												href="/CRUD-remake/ServletControl?op=edit&id=<c:out value ="${user.id }"/>">Edit</a>
 												&nbsp;&nbsp;&nbsp;&nbsp; <a
@@ -55,16 +53,8 @@
 											</td>
 										</tr>
 									</c:forEach>
-								</tbody>
 							</table>
-							<br>
-							<br> <a href="/CRUD-remake/menu.jsp">Main Page</a>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</main>
-	</div>
-</body>
+							
+	
+</div>
 </html>
