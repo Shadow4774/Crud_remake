@@ -62,8 +62,9 @@ public class ServletControl extends HttpServlet{
 			break;
 			
 		case "newLogin":
-			//TODO: create the JSP page
-			//forward(request, response, "/newLogin.jsp");
+			//TODO: created the JSP page
+			forward(request, response, "/newLogin.jsp");
+			//showNewLogin (request, response);
 			break;
 			
 		case "insert":
@@ -97,6 +98,36 @@ public class ServletControl extends HttpServlet{
 	}
 	
 	/**
+	 * Inner forwarder for create new user to NewLogin page
+	 * @param request
+	 * @param response
+	 * @throws SQLException
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void showNewLogin(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		String uname=request.getParameter("uname");
+		String pwd=request.getParameter("pwd");
+		boolean test = false;
+		/*/
+		test = uname.equals("crud")&& pwd.equals("0000");
+		/*/
+		String crypted = DBActions.getPassword(uname);
+		test = PasswordOps.verifyPass(pwd, crypted);
+		//*/
+		if(test)
+		{
+			forward(request, response, "/Login.jsp");
+		}
+		else
+		{
+			forward(request, response, "/ErrorNewLogin.jsp");
+		}
+		
+	}
+	
+	/**
 	 * Inner forwarder for access with user to login page
 	 * @param request
 	 * @param response
@@ -109,7 +140,7 @@ public class ServletControl extends HttpServlet{
 		String uname=request.getParameter("uname");
 		String pwd=request.getParameter("pwd");
 		boolean test = false;
-		//
+		/*/
 		test = uname.equals("crud")&& pwd.equals("0000");
 		/*/
 		String crypted = DBActions.getPassword(uname);
@@ -158,8 +189,16 @@ public class ServletControl extends HttpServlet{
 	
 	private void insertLoginUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
-		DBActions.insertLoginUser(request, response);
-		forward(request, response, "/menu.jsp");
+		boolean test=DBActions.insertLoginUser(request, response);
+		//forward(request, response, "/menu.jsp");
+		if(test)
+		{
+			forward(request, response, "/Login.jsp");
+		}
+		else
+		{
+			forward(request, response, "/ErrorNewLogin.jsp");
+		}
 	}
 	
 	/**

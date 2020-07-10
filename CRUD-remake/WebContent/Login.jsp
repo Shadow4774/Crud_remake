@@ -26,6 +26,10 @@
         </div>
 
         <input type="submit" class="logbtn" value="Login">
+        
+        <div class="bottom-text">
+          Don't have account? <a href="NewLogin.jsp">Sign up</a>
+        </div>
 
       </form>
 

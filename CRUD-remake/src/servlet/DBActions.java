@@ -228,8 +228,8 @@ public class DBActions {
 	}
 	
 	public static boolean insertLoginUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String username = request.getParameter("uname");
+		String password = request.getParameter("pwd");
 		
 		return innerInsertLoginUser(username, password);
 	}
@@ -240,6 +240,10 @@ public class DBActions {
 	
 	private static boolean innerInsertLoginUser(String username, String password) throws SQLException {
 		if(StringUtils.isNullOrWhiteSpace(username) || StringUtils.isNullOrWhiteSpace(password))
+			return false;
+		
+		String pwdTemp = getPassword(username);
+		if (!pwdTemp.equals(""))
 			return false;
 		
 		String crypted = PasswordOps.crypt(password);
