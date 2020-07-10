@@ -18,9 +18,10 @@
 	justify-content: center;
 }
 
-.mainBox { .mdl-layout__content { padding:24px;
-	flex: none;
+.mainBox {
+	
 }
+ 
 
 .line {
 	background: linear-gradient(120deg, #3498db, #8e44ad);
