@@ -1,4 +1,18 @@
 @charset "ISO-8859-1";
+
+@font-face {
+	font-family: 'Montserrat-Bold';
+	src: url('Montserrat-Bold.ttf') format('truetype');
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	font-family: 'Montserrat-Bold';
+	box-sizing: border-box;
+}
+
 .box-center {
 	align-items: center;
 	justify-content: center;
@@ -14,7 +28,7 @@
 }
 
 .demo-layout-transparent 
-.mdl-layout__header,
+.mdl-layout__header
 .demo-layout-transparent 
 .mdl-layout__drawer-button {
 	
