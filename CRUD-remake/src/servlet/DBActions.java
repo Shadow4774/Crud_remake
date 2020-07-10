@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.User;
 import models.User.eType;
+import utilities.PasswordOps;
+import utilities.StringUtils;
 
 public class DBActions {
 
@@ -109,6 +111,8 @@ public class DBActions {
 		statement.setString(6, type);
 		
 		inserted = statement.executeUpdate() > 0;
+		
+		conn.close();
 		return inserted;
 	}
 	
@@ -148,6 +152,8 @@ public class DBActions {
 		statement.setInt(1, id);
 		
 		boolean deleted = statement.executeUpdate() > 0;
+		
+		conn.close();
 		return deleted;
 	}
 	
@@ -166,6 +172,11 @@ public class DBActions {
 		String type = request.getParameter("type");
 		int age = getAge(birth);
 		
+		return innerEditUser(id, name, surname, birth, type, age);
+	}
+
+	private static boolean innerEditUser(int id, String name, String surname, Date birth, String type, int age)
+			throws SQLException {
 		boolean inserted=false;
 		String sql = "UPDATE crud_users SET name = ?, surname = ?, birthdate = ?, age = ?, type = ? WHERE id = ?";
 		Connection conn = ConnHelper.getConnection();
@@ -178,6 +189,8 @@ public class DBActions {
 		statement.setInt(6, id);
 		
 		inserted = statement.executeUpdate() > 0;
+		
+		conn.close();
 		return inserted;
 	}
 	
@@ -207,7 +220,62 @@ public class DBActions {
 			type = User.charStrToEnum(rs.getString("type"));
 			age = getAge(bDate);
 		}
+		
+		conn.close();
 		return Optional.of(new User(id_i, name, surname, bDate, null, age, type));
+	}
+	
+	public static String getPassword(String username) throws SQLException {
+		String sql = "SELECT username, password FROM crud_passwords WHERE username = ?";
+		String pass = "";
+		
+		Connection conn = ConnHelper.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, username);
+		ResultSet rs = statement.executeQuery();
+		
+		if(rs.next())
+			pass = rs.getString("password");
+		
+		conn.close();
+		return pass;
+	}
+	
+	public static boolean insertLoginUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		String username = request.getParameter("uname");
+		String password = request.getParameter("pwd");
+		
+		return innerInsertLoginUser(username, password);
+	}
+	
+	public static boolean insertLoginUser(String username, String password) throws SQLException {
+		return innerInsertLoginUser(username, password);
+	}
+	
+	private static boolean innerInsertLoginUser(String username, String password) throws SQLException {
+		if(StringUtils.isNullOrWhiteSpace(username) || StringUtils.isNullOrWhiteSpace(password))
+			return false;
+		
+		String pwdTemp = getPassword(username);
+
+		if (!pwdTemp.equals(""))
+
+	
+			return false;
+		
+		String crypted = PasswordOps.crypt(password);
+		boolean inserted = false;
+		String sql = "INSERT into crud_passwords (username, password) VALUES (?, ?)";
+		
+		Connection conn = ConnHelper.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, username);
+		statement.setString(2, crypted);
+		
+		inserted = statement.executeUpdate() > 0;
+		
+		conn.close();
+		return inserted;
 	}
 	
 	/**
@@ -218,7 +286,7 @@ public class DBActions {
 	 * @throws SQLException
 	 */
 	public static int getIdForNameSurname(String name, String surname) throws SQLException {
-		String sql = "SELECT id FROM crud_users WHERE name LIKE ? AND surname LIKE ?";
+		String sql = "SELECT id FROM crud_users WHERE name = ? AND surname = ?";
 		int id = 0;
 //		int rows = 0;
 		
@@ -234,6 +302,8 @@ public class DBActions {
 			else						//id != 0 means that there are more than 1 record with same name/surname
 				id = -1;
 		}
+		
+		conn.close();
 		return id;						//0 = record not found, -1 = multiple records found, otherwise = id of user
 	}
 	

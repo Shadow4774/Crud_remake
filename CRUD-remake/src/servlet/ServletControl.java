@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 
 import models.User;
+import utilities.PasswordOps;
 
 @WebServlet("/ServletControl")
 public class ServletControl extends HttpServlet {
@@ -28,11 +29,9 @@ public class ServletControl extends HttpServlet {
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		try {
 			processRequest(request, response);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -55,7 +54,7 @@ public class ServletControl extends HttpServlet {
 		case "login":
 			showLogin(request, response);
 			break;
-		
+			
 		case "list":
 			request.setAttribute("users", DBActions.getAll());
 			forward(request, response, "/listAll.jsp");
@@ -64,10 +63,23 @@ public class ServletControl extends HttpServlet {
 		case "new":
 			forward(request, response, "/newUser.jsp");
 			break;
+	
+		case "newLogin":
+			//TODO: created the JSP page
+			forward(request, response, "/newLogin.jsp");
+			//showNewLogin (request, response);
+			break;
+			
 
 		case "insert":
 			insertUser(request, response);
 			break;
+
+			
+		case "insertLogin":
+			insertLoginUser(request, response);
+			break;
+			
 
 		case "delete":
 			deleteUser(request, response);
@@ -93,6 +105,36 @@ public class ServletControl extends HttpServlet {
 	
 	
 	/**
+	 * Inner forwarder for create new user to NewLogin page
+	 * @param request
+	 * @param response
+	 * @throws SQLException
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void showNewLogin(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		String uname=request.getParameter("uname");
+		String pwd=request.getParameter("pwd");
+		boolean test = false;
+		/*/
+		test = uname.equals("crud")&& pwd.equals("0000");
+		/*/
+		String crypted = DBActions.getPassword(uname);
+		test = PasswordOps.verifyPass(pwd, crypted);
+		//*/
+		if(test)
+		{
+			forward(request, response, "/Login.jsp");
+		}
+		else
+		{
+			forward(request, response, "/ErrorNewLogin.jsp");
+		}
+		
+	}
+	
+	/**
 	 * Inner forwarder for access with user to login page
 	 * 
 	 * @param request
@@ -103,16 +145,27 @@ public class ServletControl extends HttpServlet {
 	 */
 	private void showLogin(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
-		String uname = request.getParameter("uname");
-		String pwd = request.getParameter("pwd");
-		if (uname.equals("crud") && pwd.equals("0000")) {
-			// response.sendRedirect("index.html");
+
+		String uname=request.getParameter("uname");
+		String pwd=request.getParameter("pwd");
+		boolean test = false;
+		/*/
+		test = uname.equals("crud")&& pwd.equals("0000");
+		/*/
+		String crypted = DBActions.getPassword(uname);
+		test = PasswordOps.verifyPass(pwd, crypted);
+		//*/
+		if(test)
+		{
 			forward(request, response, "/menu.jsp");
-		} else {
-			// response.sendRedirect("ErrorLogin.jsp");
-			forward(request, response, "/errorLogin.jsp");
+
 		}
 
+		else
+		{
+			forward(request, response, "/ErrorLogin.jsp");
+		}
+		
 	}
 
 	/**
@@ -146,6 +199,21 @@ public class ServletControl extends HttpServlet {
 		request.setAttribute("users", DBActions.getAll());
 		forward(request, response, "/listAll.jsp");
 	}
+
+	private void insertLoginUser(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		boolean test=DBActions.insertLoginUser(request, response);
+		//forward(request, response, "/menu.jsp");
+		if(test)
+		{
+			forward(request, response, "/Login.jsp");
+		}
+		else
+		{
+			forward(request, response, "/ErrorNewLogin.jsp");
+		}
+	}
+	
 
 	/**
 	 * Inner forwarder for receiving data to edit users
@@ -186,7 +254,7 @@ public class ServletControl extends HttpServlet {
 		String id = request.getParameter("id");
 		JSONObject json = getJson(id);
 		request.setAttribute("json", json);
-		forward(request, response, "/listAll.jsp");	//TODO: redirect where???
+		forward(request, response, "/menu.jsp");	//TODO: redirect where???
 	}
 	
 	private void forward(HttpServletRequest request, HttpServletResponse response, String page) throws ServletException, IOException {
@@ -197,7 +265,6 @@ public class ServletControl extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		 doGet(request, response);
 	}
 

@@ -1,46 +1,59 @@
 @charset "ISO-8859-1";
+
 @font-face {
 	font-family: 'Montserrat-Bold';
 	src: url('Montserrat-Bold.ttf') format('truetype');
 }
 
-.mainBox{
-	
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	font-family: 'Montserrat-Bold';
+	box-sizing: border-box;
+}
 
+.box-center {
+	align-items: center;
+	justify-content: center;
+}
+
+.mainBox { .mdl-layout__content { padding:24px;
+	flex: none;
+}
+
+.demo-layout-transparent {
+	background-color: #000040;
+}
+
+.demo-layout-transparent 
+.mdl-layout__header
+.demo-layout-transparent 
+.mdl-layout__drawer-button {
 	width: 100%;
 	height: 800px;
-	
 }
 
-.line{
-	
-	background:linear-gradient(120deg,#3498db,#8e44ad);
-	display:flex;
+.line {
+	background: linear-gradient(120deg, #3498db, #8e44ad);
+	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items:center;
+	align-items: center;
 	width: 100%;
 	height: 55px;
-	
-	
-	
-	
 }
 
-.date{
-	
-	color:white;
+.date {
+	color: white;
 	font-family: 'Montserrat-Bold';
 	font-size: 16px;
 	padding: 12px;
-	
 }
 
-.words{
-	
-	color:white;
+.words {
+	color: white;
 	font-family: 'Montserrat-Bold';
 	font-size: 16px;
 	padding: 12px;
-	
 }
