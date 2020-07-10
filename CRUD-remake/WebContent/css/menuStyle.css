@@ -22,18 +22,6 @@
 	flex: none;
 }
 
-.demo-layout-transparent {
-	background-color: #000040;
-}
-
-.demo-layout-transparent 
-.mdl-layout__header
-.demo-layout-transparent 
-.mdl-layout__drawer-button {
-	width: 100%;
-	height: 800px;
-}
-
 .line {
 	background: linear-gradient(120deg, #3498db, #8e44ad);
 	display: flex;
