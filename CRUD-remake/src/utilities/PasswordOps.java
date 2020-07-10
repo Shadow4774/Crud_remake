@@ -1,5 +1,7 @@
 package utilities;
 
+import static org.junit.Assert.fail;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -18,7 +20,12 @@ public class PasswordOps {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
 			md.update(base.getBytes());
 			digested = md.digest();
-			crypted = new String(digested);
+//			crypted = new String(digested);
+			StringBuffer hexString = new StringBuffer();
+			for (int i = 0; i < digested.length; i++) {
+				hexString.append(Integer.toHexString(0xFF & digested[i]));
+			}
+			crypted = hexString.toString();
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
