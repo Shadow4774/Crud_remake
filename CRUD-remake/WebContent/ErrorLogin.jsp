@@ -15,7 +15,7 @@
     <form method="post" action="ServletControl" class="login-form">
 	<input type="hidden" name="op" value="login">
         
-        <h1>Unsuccessfull Login<br><br><a href="/CRUD-remake/Login.jsp">BACK TO LOGIN</a></br></br></h1>
-  	
+        <h1>Unsuccessfully Login<br><br><a href="/CRUD-remake/Login.jsp">BACK TO LOGIN</a></h1>
+  	</form>
   	</body>
 </html>

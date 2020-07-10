@@ -111,6 +111,8 @@ public class DBActions {
 		statement.setString(6, type);
 		
 		inserted = statement.executeUpdate() > 0;
+		
+		conn.close();
 		return inserted;
 	}
 	
@@ -150,6 +152,8 @@ public class DBActions {
 		statement.setInt(1, id);
 		
 		boolean deleted = statement.executeUpdate() > 0;
+		
+		conn.close();
 		return deleted;
 	}
 	
@@ -168,6 +172,11 @@ public class DBActions {
 		String type = request.getParameter("type");
 		int age = getAge(birth);
 		
+		return innerEditUser(id, name, surname, birth, type, age);
+	}
+
+	private static boolean innerEditUser(int id, String name, String surname, Date birth, String type, int age)
+			throws SQLException {
 		boolean inserted=false;
 		String sql = "UPDATE crud_users SET name = ?, surname = ?, birthdate = ?, age = ?, type = ? WHERE id = ?";
 		Connection conn = ConnHelper.getConnection();
@@ -180,6 +189,8 @@ public class DBActions {
 		statement.setInt(6, id);
 		
 		inserted = statement.executeUpdate() > 0;
+		
+		conn.close();
 		return inserted;
 	}
 	
@@ -209,6 +220,8 @@ public class DBActions {
 			type = User.charStrToEnum(rs.getString("type"));
 			age = getAge(bDate);
 		}
+		
+		conn.close();
 		return Optional.of(new User(id_i, name, surname, bDate, null, age, type));
 	}
 	
@@ -224,6 +237,7 @@ public class DBActions {
 		if(rs.next())
 			pass = rs.getString("password");
 		
+		conn.close();
 		return pass;
 	}
 	
@@ -243,7 +257,10 @@ public class DBActions {
 			return false;
 		
 		String pwdTemp = getPassword(username);
+
 		if (!pwdTemp.equals(""))
+
+	
 			return false;
 		
 		String crypted = PasswordOps.crypt(password);
@@ -256,6 +273,8 @@ public class DBActions {
 		statement.setString(2, crypted);
 		
 		inserted = statement.executeUpdate() > 0;
+		
+		conn.close();
 		return inserted;
 	}
 	
@@ -283,6 +302,8 @@ public class DBActions {
 			else						//id != 0 means that there are more than 1 record with same name/surname
 				id = -1;
 		}
+		
+		conn.close();
 		return id;						//0 = record not found, -1 = multiple records found, otherwise = id of user
 	}
 	
