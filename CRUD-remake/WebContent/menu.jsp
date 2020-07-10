@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<link href="css/menuStyle.css" rel="stylesheet" type="text/css">
+<style type="text/css"><%@include file="/css/menuStyle.css"%></style>
 <meta charset="ISO-8859-1">
 
 <div>
