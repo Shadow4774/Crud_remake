@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 
 import models.User;
+import utilities.PasswordOps;
 
 @WebServlet("/ServletControl")
 public class ServletControl extends HttpServlet{
@@ -28,11 +29,9 @@ public class ServletControl extends HttpServlet{
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		try {
 			processRequest(request, response);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -52,7 +51,7 @@ public class ServletControl extends HttpServlet{
 		case "login":
 			showLogin(request, response);
 			break;
-		
+			
 		case "list":
 			request.setAttribute("users", DBActions.getAll());
 			forward(request, response, "/listAll.jsp");
@@ -62,8 +61,17 @@ public class ServletControl extends HttpServlet{
 			forward(request, response, "/newUser.jsp");
 			break;
 			
+		case "newLogin":
+			//TODO: create the JSP page
+			//forward(request, response, "/newLogin.jsp");
+			break;
+			
 		case "insert":
 			insertUser(request, response);
+			break;
+			
+		case "insertLogin":
+			insertLoginUser(request, response);
 			break;
 			
 		case "delete":
@@ -100,19 +108,24 @@ public class ServletControl extends HttpServlet{
 			throws SQLException, ServletException, IOException {
 		String uname=request.getParameter("uname");
 		String pwd=request.getParameter("pwd");
-		if(uname.equals("crud")&& pwd.equals("0000"))
+		boolean test = false;
+		//
+		test = uname.equals("crud")&& pwd.equals("0000");
+		/*/
+		String crypted = DBActions.getPassword(uname);
+		test = PasswordOps.verifyPass(pwd, crypted);
+		//*/
+		if(test)
 		{
-			//response.sendRedirect("index.html");
 			forward(request, response, "/menu.jsp");
 		}
 		else
 		{
-			//response.sendRedirect("ErrorLogin.jsp");
 			forward(request, response, "/ErrorLogin.jsp");
 		}
 		
 	}
-	
+
 	/**
 	 * Inner forwarder for deleting users
 	 * @param request
@@ -141,6 +154,12 @@ public class ServletControl extends HttpServlet{
 		DBActions.insertUser(request, response);
 		request.setAttribute("users", DBActions.getAll());
 		forward(request, response, "/listAll.jsp");
+	}
+	
+	private void insertLoginUser(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		DBActions.insertLoginUser(request, response);
+		forward(request, response, "/menu.jsp");
 	}
 	
 	/**
@@ -179,7 +198,7 @@ public class ServletControl extends HttpServlet{
 		String id = request.getParameter("id");
 		JSONObject json = getJson(id);
 		request.setAttribute("json", json);
-		forward(request, response, "/listAll.jsp");	//TODO: redirect where???
+		forward(request, response, "/menu.jsp");	//TODO: redirect where???
 	}
 	
 	private void forward(HttpServletRequest request, HttpServletResponse response, String page) throws ServletException, IOException {
@@ -189,7 +208,6 @@ public class ServletControl extends HttpServlet{
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		 doGet(request, response);
 	}
 	
