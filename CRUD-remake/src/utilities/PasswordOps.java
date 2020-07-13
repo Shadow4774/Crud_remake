@@ -1,7 +1,5 @@
 package utilities;
 
-import static org.junit.Assert.fail;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
