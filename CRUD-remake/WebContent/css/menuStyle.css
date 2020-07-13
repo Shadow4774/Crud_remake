@@ -11,9 +11,13 @@
 }
 
 .mainBox {
+<<<<<<< HEAD
+	
+=======
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+>>>>>>> branch 'slave' of https://github.com/Shadow4774/Crud_remake.git
 }
  
 

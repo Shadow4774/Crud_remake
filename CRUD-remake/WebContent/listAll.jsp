@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <link href="css/listAllStyle.css" rel="stylesheet" type="text/css">
 <div class='mainBox'>
