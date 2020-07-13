@@ -2,6 +2,8 @@ package models;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONObject;
 
@@ -82,5 +84,25 @@ public class JsonConverter {
 			user.setCreationTimestamp(tempTimestamp);
 		}
 		return user;
+	}
+	
+	public static List<JSONObject> usersToJson(List<User> users) {
+		List<JSONObject> jsons = new ArrayList<JSONObject>();
+		
+		for (User user : users) {
+			jsons.add(user.getJsonObj());
+		}
+		
+		return jsons;
+	}
+	
+	public static List<User> jsonsToUsers(List<JSONObject> jsons) {
+		List<User> users = new ArrayList<User>();
+		
+		for (JSONObject json : jsons) {
+			users.add(jsonToUser(json));
+		}
+		
+		return users;
 	}
 }

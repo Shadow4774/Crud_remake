@@ -11,10 +11,10 @@
 	<div class='line'>
 
 
-		<a class='w' href="menu.jsp">Home Page</a> 
-		<a class='w' href="newUser.jsp">Insert User</a>
-		<a class='w'href="ServletControl?op=list">List Users</a>
-		<a class='words' href="Login.jsp">Logout</a>
+		<a class='w' href="menu.jsp">Home Page</a> <a class='w'
+			href="newUser.jsp">Insert User</a> <a class='w'
+			href="ServletControl?op=list">List Users</a> <a class='words'
+			href="Login.jsp">Logout</a>
 		<div class='date'>
 			<%
 				java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy hh:mm");
@@ -59,11 +59,14 @@
 				Type:
 				<div class="typeForm">
 					<label class="word" for="owner">Owner</label> <input class=" "
-						type="radio" name="type" id="owner" value="O" checked> <label
-						class="word" for="spouse">Spouse</label> <input class=" "
-						type="radio" name="type" id="spouse" value="S"> <label
-						class="word" for="child">Child</label> <input class=" "
-						type="radio" name="type" id="child" value="C"><br>
+						type="radio" name="type" id="owner" value="O"
+						${userType == "O" ? "checked" : ""}> <label class="word"
+						for="spouse">Spouse</label> <input class=" " type="radio"
+						name="type" id="spouse" value="S"
+						${userType == "S" ? "checked" : ""}> <label class="word"
+						for="child">Child</label> <input class=" " type="radio"
+						name="type" id="child" value="C"
+						${userType == "C" ? "checked" : ""}><br>
 				</div>
 
 				<div class='block'>
