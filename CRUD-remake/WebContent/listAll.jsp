@@ -9,6 +9,7 @@
 
 		<a class='words' href="menu.jsp">Home Page</a> <a class='words'
 						href="newUser.jsp">Insert User</a>
+		<a class='words' href="Login.jsp">Logout</a>
 		<div class='date'>
 			<%
 				java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy hh:mm");
