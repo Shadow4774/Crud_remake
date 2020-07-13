@@ -90,6 +90,7 @@ body {
 	outline: none;
 	cursor: pointer;
 	transition: .5s;
+	border-radius: 10px;
 }
 
 .logbtn:hover {

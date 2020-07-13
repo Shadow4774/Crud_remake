@@ -5,13 +5,13 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="styleLoginPage.css">
+    <link rel="stylesheet" href="css/styleLoginPage.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
  	<style type="text/css"><%@include file="/css/styleLoginPage.css" %></style>
   </head>
   <body>
 
-    <form method="post" action="ServletControl" class="login-form">
+    <form method="post" action="ServletControl?op=login" class="login-form">
 	<input type="hidden" name="op" value="login">
         <h1>Login</h1>
 
@@ -27,7 +27,7 @@
 
         <input type="submit" class="logbtn" value="Login">
         
-        <div class="bottom-text">
+         <div class="bottom-text">
           Don't have account? <a href="NewLogin.jsp">Sign up</a>
         </div>
 

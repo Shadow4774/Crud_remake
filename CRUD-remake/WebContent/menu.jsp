@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
-<style type="text/css"><%@include file="/css/menuStyle.css"%></style>
+<html lang="en" dir="ltr">
+<link href="css/menuStyle.css" rel="stylesheet" type="text/css">
 <meta charset="ISO-8859-1">
 
-<div>
+<div class='mainBox'>
 
-	<div class='mainBox'>
-
-		<div class='line'>
+	<div class='line'>
 
 			
 			 <a class='words'>Home Page</a>
@@ -21,18 +19,8 @@
 				%>
 				<h5><%=df.format(new java.util.Date())%>
 				</h5>
-			</div>
-
-		</div>
-
-
-
-
-	</div>
-
-</div>
-
-
-
-
+		  </div>
+	   </div>
+     </div>
+ 
 </html>
