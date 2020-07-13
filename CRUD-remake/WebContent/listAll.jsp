@@ -46,7 +46,7 @@
 											<td class='block'>${user.creationTimestamp }</td>
 											<td class='block'>${user.age}</td>
 											<td class='block'>${user.type}</td>
-											<td><a
+											<td><a 
 												href="/CRUD-remake/ServletControl?op=edit&id=<c:out value ="${user.id }"/>">Edit</a>
 												&nbsp;&nbsp;&nbsp;&nbsp; <a
 												href="/CRUD-remake/ServletControl?op=delete&id=<c:out value ="${user.id }"/>">Delete</a>

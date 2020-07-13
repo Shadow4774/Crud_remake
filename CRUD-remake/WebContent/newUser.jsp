@@ -12,8 +12,8 @@
 	<div class='line'>
 
 
-		<a class='w' href="menu.jsp">Home Page</a> <a class='w'
-			href="ServletControl?op=list">ListUsers</a>
+		<a class='w' href="menu.jsp">Home Page</a> 
+		<a class='w'href="ServletControl?op=list">ListUsers</a>
 		<div class='date'>
 			<%
 				java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy hh:mm");
@@ -21,32 +21,31 @@
 			<h5><%=df.format(new java.util.Date())%>
 			</h5>
 		</div>
-
-	</div>
+     </div>
 
 	<div class='space'></div>
 	<div class='box'>
 		<div class='rowLine'>
 			<label class='words'>New User</label>
-		</div>
+		</div><br>
 <form action="ServletControl" method="POST" name="dati">
 	<input type=hidden name="op" value="insert">
 
 		<div class='row'>
-			<label class='word'>Name</label> <input class='in' type='text' name= 'name' id='name'></input>
+			<label class='word'>Name:</label> <input class='in' type='text' name= 'name' id='name'></input>
 		</div>
 
 		<div class='row'>
-			<label class='word'>Surname</label> <input class='in' type='text' name= 'surname' id='surname'></input>
+			<label class='word'>Surname:</label> <input class='in' type='text' name= 'surname' id='surname'></input>
 		</div>
 		<div class='row'>
-			<label class='word'>BirthDate</label> <input class='in' type="date" name="birth" 
+			<label class='word'>BirthDate:</label> <input class='in' type="date" name="birth" 
 			value="2000-01-01"></input>
 		</div>
 	
 	
 		<div class='row'>
-		Type:
+		<label class='word'>Type:</label>
 		<div class= 'typeForm'>
 			<label class='word'>Owner</label> <input class='' type="radio" name="type"
 										value="O" id="owner" checked/>
