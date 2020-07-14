@@ -7,8 +7,9 @@
 
 	<div class='line'>
 
-		<a class='words' href="menu.jsp">Home Page</a> <a class='words'
-						href="newUser.jsp">Insert User</a>
+		<a class='words' href="menu.jsp">Home Page</a> 
+		<a class='words'>List Users</a>
+		<a class='words' href="newUser.jsp">Insert User</a>
 		<a class='words' href="Login.jsp">Logout</a>
 		<div class='date'>
 			<%
@@ -47,9 +48,10 @@
 											<td class='block'>${user.creationTimestamp }</td>
 											<td class='block'>${user.age}</td>
 											<td class='block'>${user.type}</td>
-											<td><a 
+											<td><a class='block'
 												href="/CRUD-remake/ServletControl?op=edit&id=<c:out value ="${user.id }"/>">Edit</a>
-												&nbsp;&nbsp;&nbsp;&nbsp; <a
+												&nbsp;&nbsp;&nbsp;&nbsp; 
+												<a class='block'
 												href="/CRUD-remake/ServletControl?op=delete&id=<c:out value ="${user.id }"/>">Delete</a>
 											</td>
 										</tr>

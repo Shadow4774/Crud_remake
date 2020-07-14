@@ -12,9 +12,9 @@
 
 
 		<a class='w' href="menu.jsp">Home Page</a> 
-		<a class='w' href="newUser.jsp">Insert User</a>
 		<a class='w'href="ServletControl?op=list">List Users</a>
-		<a class='words' href="Login.jsp">Logout</a>
+		<a class='w' href="newUser.jsp">Insert User</a>
+		<a class='w' href="Login.jsp">Logout</a>
 		<div class='date'>
 			<%
 				java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy hh:mm");
@@ -76,11 +76,11 @@
 									</div>
                                     </div>
 									<div class='block'>
-		                            	<button class='btn'>Edit</button>
+		                            	<button class='btn'>EDIT</button>
+		                            	</div>
 								</form>
 							</div>
 						</div>
-					</div></form>	
-	</div>
-</div>
+					</div>	
+
 </html>
