@@ -9,10 +9,10 @@
 
 	<div class='line'>
 
-		<a class='w' href="menu.jsp">Home Page</a> <a class='w'
-			href="ServletControl?op=list">List Users</a> <a class='w'
-			href="newUser.jsp">Insert User</a> <a class='w' href="Login.jsp">Logout</a>
-		>>>>>>> branch 'slave' of https://github.com/Shadow4774/Crud_remake
+		<a class='w' href="menu.jsp">Home Page</a>
+		<a class='w' href="ServletControl?op=list">List Users</a>
+		<a class='w' href="newUser.jsp">Insert User</a>
+		<a class='w' href="Login.jsp">Logout</a>
 		<div class='date'>
 			<%
 				java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy hh:mm");
