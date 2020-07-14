@@ -24,7 +24,7 @@
           <input type="password" name="pwd">
           <span data-placeholder="Password"></span>
         </div>
-
+         <br>
         <input type="submit" class="logbtn" value="Login">
         
          <div class="bottom-text">
