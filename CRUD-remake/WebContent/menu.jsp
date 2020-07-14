@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-
-<html>
-<link href="css/menuStyle.css" rel="stylesheet" type="text/css">
-<style type="text/css"><%@include file="/css/menuStyle.css"%></style>
-
 <html lang="en" dir="ltr">
-
-
+<link href="css/menuStyle.css" rel="stylesheet" type="text/css">
 <meta charset="ISO-8859-1">
 
 <div class='mainBox'>
@@ -17,7 +11,6 @@
 
 			
 			 <a class='words'>Home Page</a>
-			 <a class='words' href="Login.jsp">Back to Login Page</a>
 			 <a class='words' href="ServletControl?op=list">List Users</a>
 			 <a class='words' href="newUser.jsp">Insert User</a>
 			 <a class='words' href="Login.jsp">Logout</a>
