@@ -229,6 +229,7 @@ public class ServletControl extends HttpServlet {
 		String id = request.getParameter("id");
 		Optional<User> existingUser = DBActions.find(id);
 		existingUser.ifPresent(s -> request.setAttribute("user", s));
+		existingUser.ifPresent(s -> request.setAttribute("userType", s.getTypeString()));
 		forward(request, response, "/editUser.jsp");
 	}
 

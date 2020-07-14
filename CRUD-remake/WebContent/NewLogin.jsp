@@ -28,7 +28,8 @@
         <input type="submit" class="logbtn" value="Submit">
         
         <div class="bottom-text">
-         You don't need? <a href="Login.jsp">Go Back</a>
+         You don't need? 
+         <a href="Login.jsp">Go Back</a>
         </div>
 
       </form>
