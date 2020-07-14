@@ -7,14 +7,13 @@
 
 <div class='mainBox'>
 
-
 	<div class='line'>
 
-
-		<a class='w' href="menu.jsp">Home Page</a> <a class='w'
-			href="newUser.jsp">Insert User</a> <a class='w'
-			href="ServletControl?op=list">List Users</a> <a class='words'
-			href="Login.jsp">Logout</a>
+			<a class='w' href="menu.jsp">Home Page</a>
+			<a class='w' href="ServletControl?op=list">List Users</a>
+			<a class='w' href="newUser.jsp">Insert User</a>
+			<a class='w' href="Login.jsp">Logout</a> >>>>>>> branch 'slave' of
+		https://github.com/Shadow4774/Crud_remake
 		<div class='date'>
 			<%
 				java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy hh:mm");
@@ -40,40 +39,44 @@
 				</div>
 
 				<div class="row">
-					<label class="word" for="name">name:</label> <input class=" in"
+					<label class="word" for="name">Name:</label> <input class=" in"
 						type="text" name="name" id="name" value="${user.name }"><br>
 				</div>
 
 				<div class="row">
-					<label class="word" for="surname">surname:</label> <input
+					<label class="word" for="surname">Surname:</label> <input
 						class=" in" type="text" name="surname" id="surname"
 						value="${user.surname }"><br>
 				</div>
 
 				<div class="row">
-					<label class="word" for="date">date:</label> <input class=" in"
+					<label class="word" for="date">Birthdate:</label> <input class=" in"
 						type="date" name="birth" id="birth" value="${user.birthDate }"><br>
 				</div>
 
 
-				Type:
-				<div class="typeForm">
-					<label class="word" for="owner">Owner</label> <input class=" "
-						type="radio" name="type" id="owner" value="O"
-						${userType == "O" ? "checked" : ""}> <label class="word"
-						for="spouse">Spouse</label> <input class=" " type="radio"
-						name="type" id="spouse" value="S"
-						${userType == "S" ? "checked" : ""}> <label class="word"
-						for="child">Child</label> <input class=" " type="radio"
-						name="type" id="child" value="C"
-						${userType == "C" ? "checked" : ""}><br>
+				<div class="row">
+					<label class='word'>Type:</label>
+					<div class="typeForm">
+						<label class="word" for="owner">Owner</label>
+						<input class=" " type="radio" name="type" id="owner" value="O"
+							${userType == "O" ? "checked" : ""}>
+						<label class="word" for="spouse">Spouse</label>
+						<input class=" " type="radio" name="type" id="spouse" value="S"
+							${userType == "S" ? "checked" : ""}>
+						<label class="word" for="child">Child</label>
+						<input class=" " type="radio" name="type" id="child" value="C"
+							${userType == "C" ? "checked" : ""}>
+						<br>
+					</div>
 				</div>
 
 				<div class='block'>
 					<button class='btn'>Edit</button>
 				</div>
+				</div>
 			</form>
 		</div>
-	</div>
+</div>
 </div>
 </html>

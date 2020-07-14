@@ -13,7 +13,8 @@
 
 
 		<a class='w' href="menu.jsp">Home Page</a> 
-		<a class='w'href="ServletControl?op=list">ListUsers</a>
+		<a class='w'href="ServletControl?op=list">List Users</a>
+		<a class='w'>Insert User</a>
 		<a class='w' href="Login.jsp">Logout</a>
 		<div class='date'>
 			<%
@@ -23,7 +24,6 @@
 			</h5>
 		</div>
      </div>
-
 	<div class='space'></div>
 	<div class='box'>
 		<div class='rowLine'>
