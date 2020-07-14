@@ -62,6 +62,7 @@ public class DBSearch {
 				sql += "AND ";
 			sql += "name = ? ";
 			options[OPT_NAME] = true;
+			first = false;
 		}
 		
 		if (!StringUtils.isNullOrWhiteSpace(surname)) {
@@ -69,6 +70,7 @@ public class DBSearch {
 				sql += "AND ";
 			sql += "surname = ? ";
 			options[OPT_SURNAME] = true;
+			first = false;
 		}
 		
 		if (lowerBdBound != null || upperBdBound != null) {
@@ -76,6 +78,7 @@ public class DBSearch {
 				sql += "AND ";
 			sql += "birthdate BETWEEN ? AND ? ";
 			options[OPT_BIRTH] = true;
+			first = false;
 			
 			if(lowerBdBound == null)
 				lowerBdBound = Date.valueOf("1970-01-01");
@@ -88,6 +91,7 @@ public class DBSearch {
 				sql += "AND ";
 			sql += "age BETWEEN ? AND ? ";
 			options[OPT_AGE] = true;
+			first = false;
 		}
 		
 		if (!StringUtils.isNullOrWhiteSpace(type)) {
@@ -95,6 +99,7 @@ public class DBSearch {
 				sql += "AND ";
 			sql += "type = ? ";
 			options[OPT_TYPE] = true;
+			first = false;
 		}
 		
 		Connection conn = ConnHelper.getConnection();
