@@ -48,12 +48,11 @@ public class DBSearch {
 		return jsons;
 	}
 	
-	private static ResultSet innerSearch(String name, String surname, Date lowerBdBound, Date upperBdBound, int lowerAgeBound,
-			int upperAgeBound, String type) throws SQLException {
+	public static String getSqlString(String name, String surname, Date lowerBdBound, Date upperBdBound, int lowerAgeBound,
+			int upperAgeBound, String type, boolean[] options) {
 		
-		boolean[] options = {false, false, false, false, false};
 		boolean first = true;
-		int i = 1;
+		
 		
 		String sql = "SELECT id, name, surname, birthdate, creationTimeStamp, age, type FROM crud_users WHERE ";
 		
@@ -102,6 +101,17 @@ public class DBSearch {
 			first = false;
 		}
 		
+		return sql;
+	}
+	
+	private static ResultSet innerSearch(String name, String surname, Date lowerBdBound, Date upperBdBound, int lowerAgeBound,
+			int upperAgeBound, String type) throws SQLException {
+		
+		boolean[] options = {false, false, false, false, false};
+		int i = 1;
+		
+		String sql = getSqlString(name, surname, lowerBdBound, upperBdBound, lowerAgeBound, upperAgeBound, type, options);
+		
 		Connection conn = ConnHelper.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
 		
@@ -134,7 +144,9 @@ public class DBSearch {
 			i++;
 		}
 		
-		return statement.executeQuery();
+		ResultSet ret = statement.executeQuery();
+		conn.close();
+		return ret;
 	}
 	
 	private static List<User> resultsetToUsers(ResultSet rs) throws SQLException {
