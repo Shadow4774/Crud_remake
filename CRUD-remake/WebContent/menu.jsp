@@ -9,19 +9,18 @@
 
 	<div class='line'>
 
-			
-			 <a class='words'>Home Page</a>
-			 <a class='words' href="ServletControl?op=list">List Users</a>
-			 <a class='words' href="newUser.jsp">Insert User</a>
-			 <a class='words' href="Login.jsp">Logout</a>
-			<div class='date'>
-				<%
-					java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy hh:mm");
-				%>
-				<h5><%=df.format(new java.util.Date())%>
-				</h5>
-		  </div>
-	   </div>
-	      </div>
- 
+
+		<a class='words'>Home Page</a> <a class='words'
+			href="ServletControl?op=list">List Users</a> <a class='words'
+			href="newUser.jsp">Insert User</a> <a class='words' href="Login.jsp">Logout</a>
+		<div class='date'>
+			<%
+				java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy hh:mm");
+			%>
+			<h5><%=df.format(new java.util.Date())%>
+			</h5>
+		</div>
+	</div>
+</div>
+
 </html>
