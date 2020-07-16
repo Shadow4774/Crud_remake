@@ -177,7 +177,7 @@ public class ServletControl extends HttpServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	public void deleteUser(HttpServletRequest request, HttpServletResponse response)
+	private void deleteUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		DBActions.deleteUser(request, response);
 		request.setAttribute("users", DBActions.getAll());
@@ -193,7 +193,7 @@ public class ServletControl extends HttpServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	public void insertUser(HttpServletRequest request, HttpServletResponse response)
+	private void insertUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		DBActions.insertUser(request, response);
 		request.setAttribute("users", DBActions.getAll());
