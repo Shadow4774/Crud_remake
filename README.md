@@ -10,18 +10,18 @@ testing and dividing the work on the code for the subsequent merge of the activi
 
 
 
-#Roles:
+# Roles
 
-DEV1: Persistence and repository manager ()
+DEV1: Persistence and repository manager 
 Preparation of the production Oracle database (persisted) and of the test DB.
 Implementation of classes and bean repositories for both production and tests.
 
-DEV2: Controller Manager ()
+DEV2: Controller Manager 
 Documents the actions that will be developed in the front-end part.
 He develops the controllers that will be used for the persistence and repository part and to perform the tests. 
 It prepares a series of controller tests, testing the calls to the actions, the format and the content of the returned json.
 
-DEV3: UX JSP Manager ()
+DEV3: UX JSP Manager 
 Develops the UX of the project, compartmentalizing the development.
 
 
@@ -50,12 +50,12 @@ Provision for testing the initial mock data to develop unit tests.
 
 
 
-# Author :
+# Author 
 Marco Tugnizza, Attilio Dell'Anno, Salvatore Licata
 
 
 
-# Technologies :
+# Technologies 
 Servlet
 Java Database Connectivity (JDBC) ver.19.6.0.0
 JSP Standard Tag Library (JSTL)
@@ -63,19 +63,19 @@ Hamcrest-all ver.1.3
 Json-simple ver.1.1.1
 Mockito-core ver.2.8.47
 
-# Repository :
+# Repository 
 https:\\mvnrepository.com
 
-# Application Servers :
+# Application Servers 
 Apache Tomcat v9.0.30
 
-# DB :
+# DB 
 Oracle Express 11g,
 Oracle Sql Developer 11g
 
-# Build Tool:
+# Build Tool
 Eclipse 2019-12,
 Maven 3.6.3
 
-# URI GitHub:
+# URI GitHub
 https://github.com/Shadow4774/Crud_remake.git
