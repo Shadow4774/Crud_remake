@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.RequestDispatcher;
@@ -97,6 +98,9 @@ public class ServletControl extends HttpServlet {
 			getJson(request, response);
 			break;
 
+		case "search":
+			search(request, response);
+			break;
 		default:
 			forward(request, response, "/menu.jsp");
 			break;
@@ -281,4 +285,8 @@ public class ServletControl extends HttpServlet {
 		return json;
 	}
 
+	private void search(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		List<JSONObject> result = DBSearch.search(request, response);
+		//TODO: Booooob, do something!!
+	}
 }
