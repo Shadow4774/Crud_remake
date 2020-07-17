@@ -64,7 +64,6 @@ public class ServletControl extends HttpServlet {
 			break;
 	
 		case "newLogin":
-			//TODO: created the JSP page
 			forward(request, response, "/newLogin.jsp");
 			//showNewLogin (request, response);
 			break;
@@ -195,11 +194,12 @@ public class ServletControl extends HttpServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	private void insertUser(HttpServletRequest request, HttpServletResponse response)
+	public void insertUser(HttpServletRequest request, HttpServletResponse response) // Attention visibility Public/private if you test servlet
 			throws SQLException, ServletException, IOException {
 		DBActions.insertUser(request, response);
 		request.setAttribute("users", DBActions.getAll());
 		forward(request, response, "/listAll.jsp");
+	//response.sendRedirect("listAll.jsp");
 	}
 	
 	
