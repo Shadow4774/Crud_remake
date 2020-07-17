@@ -1,17 +1,15 @@
 package junit;
 
 import static org.junit.Assert.*;
-
 import java.sql.Date;
 import java.sql.SQLException;
-
 import org.json.simple.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
-
 import models.User;
 import models.User.eType;
 import servlet.DBActions;
+import utilities.PasswordOps;
 
 public class JunitTests {
 
@@ -44,7 +42,7 @@ public class JunitTests {
 		assertTrue(result);
 	}
 
-	@Test
+	@Ignore
 	public void testJson() {
 		User user = new User(1, "Name", "Surname", null, null, 18, null);
 		JSONObject json = user.getJsonObj();
@@ -59,5 +57,24 @@ public class JunitTests {
 		testString = json.get("age").toString();
 		int testInt = Integer.parseInt(testString);
 		assertTrue(testInt == 18);
+	}
+	
+	@Test
+	public void testPassword() {
+		try {
+			boolean result;
+			
+			DBActions.insertLoginUser("Test", "password");
+			String pass = DBActions.getPassword("Test");
+			
+			result = PasswordOps.verifyPass("password", pass);
+			assertTrue(result);
+			
+			result = PasswordOps.verifyPass("wrong", pass);
+			assertFalse(result);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

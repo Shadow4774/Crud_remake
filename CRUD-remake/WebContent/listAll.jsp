@@ -1,49 +1,65 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-	<table>
-		<thead>
-			<tr>
-				<th>NO</th>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Surname</th>
-				<th>Birthdate</th>
-				<th>Creation Timestamp</th>
-				<th>Age</th>
-				<th>Type</th>
-				<th>Operations</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:set var="count" value="0" scope="page" />
-			<c:forEach var="user" items="${users }">
-				<c:set var="count" value="${count + 1 }" scope="page" />
-				<tr>
-					<td><c:out value="${count }" /></td>
-					<td><c:out value="${user.id }" /></td>
-					<td><c:out value="${user.name }" /></td>
-					<td><c:out value="${user.surname }" /></td>
-					<td><c:out value="${user.birthDate }" /></td>
-					<td><c:out value="${user.creationTimestamp }" /></td>
-					<td><c:out value="${user.age }" /></td>
-					<td><c:out value="${user.type }" /></td>
-					<td><a href="/CRUD-remake/ServletControl?op=edit&id=<c:out value ="${user.id }"/>">Edit</a>
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="/CRUD-remake/ServletControl?op=delete&id=<c:out value ="${user.id }"/>">Delete</a>
-					</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<br><br>
-	<a href="/CRUD-remake/index.html">Main Page</a>
-</body>
+<html lang="en">
+<link href="css/listAllStyle.css" rel="stylesheet" type="text/css">
+<div class='mainBox'>
+
+	<div class='line'>
+
+		<a class='words' href="menu.jsp">Home Page</a> 
+		<a class='words'>List Users</a>
+		<a class='words' href="newUser.jsp">Insert User</a>
+		<a class='words' href="Login.jsp">Logout</a>
+		<div class='date'>
+			<%
+				java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy hh:mm");
+			%>
+			<h5><%=df.format(new java.util.Date())%>
+			</h5>
+		</div>
+
+	</div>
+	
+	<div class='space'>
+	<a class='w1' href="searchPage.jsp">Search User</a> 
+	</div>
+
+						<table class='t'>
+
+		<tr class='head'>
+			<th class='words'>Id</th>
+			<th class='words'>Name</th>
+			<th class='words'>Surname</th>
+			<th class='words'>BirthDate</th>
+			<th class='words'>Creation TimeStamp</th>
+			<th class='words'>Age</th>
+			<th class='words'>Type</th>
+			<th class='words'>Operation</th>
+		</tr>
+									
+								
+									<c:forEach items="${users}" var="user">
+										
+										<tr>
+											
+											<td class='block'>${user.id }</td>
+											<td class='block'>${user.name }</td>
+											<td class='block'>${user.surname }</td>
+											<td class='block'>${user.birthDate }</td>
+											<td class='block'>${user.creationTimestamp }</td>
+											<td class='block'>${user.age}</td>
+											<td class='block'>${user.type}</td>
+											<td><a class='block'
+												href="/CRUD-remake/ServletControl?op=edit&id=<c:out value ="${user.id }"/>">Edit</a>
+												&nbsp;&nbsp;&nbsp;&nbsp; 
+												<a class='block'
+												href="/CRUD-remake/ServletControl?op=delete&id=<c:out value ="${user.id }"/>">Delete</a>
+											</td>
+										</tr>
+									</c:forEach>
+							</table>
+							
+	
+</div>
 </html>

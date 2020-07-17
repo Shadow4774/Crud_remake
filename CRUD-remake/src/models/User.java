@@ -128,7 +128,7 @@ public class User {
 	 * @return enum for the java user type
 	 */
 	public static eType charStrToEnum(String chr) {
-		if(chr.length() != 1)
+		if(chr == null || chr.length() != 1)
 			return null;
 		
 		eType type = null;
