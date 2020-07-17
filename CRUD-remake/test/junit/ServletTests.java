@@ -77,30 +77,8 @@ public class ServletTests {
 		user.setType(eType.OWNER);
 	}
 
-//	@Ignore
-//	public void testFullName() throws IOException, ServletException {
-//		
-//		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
-//		HttpServletResponse mockResponse = mock(HttpServletResponse.class);
-//		ConnHelper.getConnection();
-//		 
-//        when(mockRequest.getParameter("name")).thenReturn("Pippo");
-//        when(mockRequest.getParameter("surname")).thenReturn("Franco");
-// 
-//        StringWriter sw = new StringWriter();
-//        PrintWriter pw = new PrintWriter(sw);
-//         
-//        when(mockResponse.getWriter()).thenReturn(pw);
-// 
-//        ServletControl servletControl = new ServletControl();
-//        servletControl.doPost(mockRequest, mockResponse);
-//        String result = sw.getBuffer().toString().trim();
-//        assertEquals(result, new String("Full Name: Pippo Franco"));
-// 
-//    }
-
 	@Ignore
-	public void testDoGetHttpServletRequestHttpServletResponse() {
+	public void test() {
 		fail("Not yet implemented");
 	}
 
