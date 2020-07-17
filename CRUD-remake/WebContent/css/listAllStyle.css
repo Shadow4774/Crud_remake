@@ -51,11 +51,22 @@
 	color: white;
 	padding: 12px;
 }
+
 .w {
 	font-family:'Montserrat-Bold';
 	font-size: 16px;
 	color: black;
 	padding: 12px;
+}
+
+.w1 {
+	font-family:'Montserrat-Bold';
+	font-size: 16px;
+	color: black;
+	padding: 12px;
+	display: flex;
+	flex-direction: row;
+	padding:30px 0px 0px 5px;
 }
 
 .block {

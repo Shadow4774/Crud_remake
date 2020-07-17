@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
 import java.beans.Statement;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Optional;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +23,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
 import models.User;
 import models.User.eType;
 import servlet.ConnHelper;
