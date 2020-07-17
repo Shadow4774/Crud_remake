@@ -288,8 +288,9 @@ public class ServletControl extends HttpServlet {
 		return json;
 	}
 
-	private void search(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-		List<JSONObject> result = DBSearch.search(request, response);
-		//TODO: Booooob, do something!!
+	private void search(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		List<User> result = DBSearch.search(request, response);
+		request.setAttribute("user", result);
+		forward(request, response, "/userFound.jsp");
 	}
 }

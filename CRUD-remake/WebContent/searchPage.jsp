@@ -51,11 +51,11 @@
 					<div class='rowThree'>
 					<div class='middleRow3'>
 					<label class='word'>from</label> <input class='in' type='number'
-						name='age' id='from'></input>
+						name='lowerAgeBound' id='lowerAgeBound'></input>
 			        </div>
                     <div class='middleRow1'>				
 					<label class='word'>to</label> <input class='in' type='number'
-						name='age' id='to'></input>
+						name='upperAgeBound' id='upperAgeBound'></input>
 			
 			</div>
 			</div>	
@@ -67,12 +67,12 @@
                 <div class='rowThree'>
 				<div class='middleRow3'>
 					<label class='word'>from</label> <input class='in' type="date"
-						name="birth" value="2000-01-01"></input>
+						name="lowerBdBound" id="lowerBdBound" value="1970-01-01"></input>
 				</div>
 
 				<div class='middleRow1'>
 					<label class='word'>to</label> <input class='in' type="date"
-						name="birth" value="2000-01-01"></input>
+						name="upperBdBound" id="upperBdBound" value="2500-01-01"></input>
 				</div>
 
 			</div>
@@ -85,7 +85,7 @@
 					<div class='typeForm'>
 					<div class='middleRow'>
 						<label class='word'>Owner</label> 
-						<input class='' type="radio" name="type" value="O" id="owner" checked /> 
+						<input class='' type="radio" name="type" value="O" id="owner"/> 
 						</div>
 						<div class='middleRow'>
 						<label class='word'>Spouse</label>
