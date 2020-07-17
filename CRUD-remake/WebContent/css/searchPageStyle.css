@@ -19,11 +19,12 @@
 .box {
 	display: flex;
 	flex-direction: column;
-	height: 500px;
-	width: 400px;
+	height: 700px;
+	width: 710px;
 	/*border: 1px solid black;*/
 	border-radius: 10px;
 	background-color:white;
+	justify-content: space-between;
 }
 
 
@@ -47,6 +48,52 @@
 	
 }
 
+.rowThree{
+	display: flex;
+	flex-direction: row;
+	padding:0px 0px 0px 0px;
+}
+
+.middleRow{
+	display: flex;
+	flex-direction: column;
+	justify-content:space-around;
+	padding:5px 50px 20px 60px;
+}
+
+.middleRow1{
+	display: flex;
+	flex-direction: column;
+	justify-content:space-around;
+	padding:5px 25px 20px 0px;
+}
+
+.middleRow2{
+	display: flex;
+	flex-direction: column;
+	justify-content:space-around;
+	padding:5px 50px 20px 40px;
+}
+.middleRow3{
+	display: flex;
+	flex-direction: column;
+	justify-content:space-around;
+	padding:5px 50px 20px 30px;
+}
+.middleRow4{
+	display: flex;
+	flex-direction: column;
+	justify-content:space-around;
+	padding:0px 0px 0px 30px;
+}
+
+.d{
+    display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	
+}
+
 .space {
 	height: 80px;
 	width: 100%;
@@ -59,7 +106,7 @@
 	align-items: center;
 	justify-content: flex-start;
 	height: 50px;
-	width: 376px;
+	width: 685px;
 	background: linear-gradient(120deg,#3498db,#8e44ad);
 	border-radius: 10px;
 	
@@ -88,12 +135,6 @@
 	font-size: 16px;
 }
 
-.row {
-	display: flex;
-	flex-direction: column;
-	padding: 12px;
-}
-
 .btn {
 	width: 90px;
 	height: 40px;
@@ -105,7 +146,7 @@
 }
 
 .block {
-	padding: 12px;
+	padding:12px 0px 0px 0px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;

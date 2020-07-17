@@ -51,6 +51,12 @@
 	color: white;
 	padding: 12px;
 }
+.w {
+	font-family:'Montserrat-Bold';
+	font-size: 16px;
+	color: black;
+	padding: 12px;
+}
 
 .block {
 	border : 1px solid black;
@@ -81,4 +87,22 @@
 .worder{
 	
 	color: white;
+}
+.btn {
+	width: 90px;
+	height: 40px;
+	color: black;
+	background-color: linear-gradient(120deg,#3498db,#8e44ad);
+	font-family:'Montserrat-Bold';
+	font-size: 16px;
+	border-radius: 10px;
+}
+.btn2 {
+	width: 150px;
+	height: 40px;
+	color: black;
+	background-color: linear-gradient(120deg,#3498db,#8e44ad);
+	font-family:'Montserrat-Bold';
+	font-size: 16px;
+	border-radius: 10px;
 }
