@@ -21,13 +21,8 @@
 
 	</div>
 	
-    <div class='space'></div>
 	<div class='space'>
-	<div>
-	<form method="get" action="searchPage.jsp">
-    <input class='btn' type="submit" value="Search" />
-	</form>
-	</div>
+	<a class='w1' href="searchPage.jsp">Search User</a> 
 	</div>
 
 						<table class='t'>
