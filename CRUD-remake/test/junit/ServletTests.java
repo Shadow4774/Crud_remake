@@ -40,8 +40,6 @@ public class ServletTests {
 	@InjectMocks
 	private ConnHelper conHpr;
 
-// @Mock private Datasource ds;
-
 	@Mock
 	private Connection conn;
 
@@ -77,10 +75,6 @@ public class ServletTests {
 		user.setType(eType.OWNER);
 	}
 
-	@Ignore
-	public void test() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void masterTest() throws IOException, SQLException, ServletException, ParseException {
@@ -145,6 +139,11 @@ public class ServletTests {
 		int test = DBActions.getIdForNameSurname(name, surname);
 		assertTrue("Check", test == 0);
 
+	}
+
+	@Ignore
+	public void test() {
+		fail("Not yet implemented");
 	}
 
 }
