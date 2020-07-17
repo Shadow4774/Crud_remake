@@ -22,12 +22,23 @@ public class DBSearch {
 	private static final int OPT_TYPE 		= 4;
 
 	public static List<User> search(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		int lowerAgeBound = 0, upperAgeBound = 150;
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
 		Date lowerBdBound = Date.valueOf(request.getParameter("lowerBdBound"));
 		Date upperBdBound = Date.valueOf(request.getParameter("upperBdBound"));
-		int lowerAgeBound = Integer.parseInt(request.getParameter("lowerAgeBound"));
-		int upperAgeBound = Integer.parseInt(request.getParameter("upperAgeBound"));
+		
+		try {
+			lowerAgeBound = Integer.parseInt(request.getParameter("lowerAgeBound"));
+		} catch (NumberFormatException e) {
+			// TODO: handle exception
+		}
+		try {
+			upperAgeBound = Integer.parseInt(request.getParameter("upperAgeBound"));
+		} catch (NumberFormatException e) {
+			// TODO: handle exception
+		}
+		
 		String type = request.getParameter("type");
 		
 		return search(name, surname, lowerBdBound, upperBdBound, lowerAgeBound, upperAgeBound, type);
@@ -35,7 +46,7 @@ public class DBSearch {
 	
 	public static List<User> search(String name, String surname, Date lowerBdBound, Date upperBdBound, int lowerAgeBound,
 			int upperAgeBound, String type) throws SQLException {
-		List<JSONObject> jsons = null;
+//		List<JSONObject> jsons = null;
 		
 		//
 		List<User> users = innerSearch(name, surname, lowerBdBound, upperBdBound, lowerAgeBound, upperAgeBound, type);
@@ -86,7 +97,7 @@ public class DBSearch {
 				upperBdBound = Date.valueOf("2500-12-31");
 		}
 		
-		if (lowerAgeBound > -1 || upperAgeBound > -1) {
+		if (lowerAgeBound > -1 && upperAgeBound > -1) {
 			if(!first)
 				sql += "AND ";
 			sql += "age BETWEEN ? AND ? ";
