@@ -24,7 +24,7 @@ public class DBSearch {
 	private static final int OPT_AGE 		= 3;
 	private static final int OPT_TYPE 		= 4;
 
-	public static List<JSONObject> search(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+	public static List<User> search(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
 		Date lowerBdBound = Date.valueOf(request.getParameter("lowerBdBound"));
@@ -36,15 +36,20 @@ public class DBSearch {
 		return search(name, surname, lowerBdBound, upperBdBound, lowerAgeBound, upperAgeBound, type);
 	}
 	
-	public static List<JSONObject> search(String name, String surname, Date lowerBdBound, Date upperBdBound, int lowerAgeBound,
+	public static List<User> search(String name, String surname, Date lowerBdBound, Date upperBdBound, int lowerAgeBound,
 			int upperAgeBound, String type) throws SQLException {
 		List<JSONObject> jsons = null;
 		
+		//
+		List<User> users = innerSearch(name, surname, lowerBdBound, upperBdBound, lowerAgeBound, upperAgeBound, type);
+		/*/
 		ResultSet rs = innerSearch(name, surname, lowerBdBound, upperBdBound, lowerAgeBound, upperAgeBound, type);
 		List<User> users = resultsetToUsers(rs);
-		jsons = JsonConverter.usersToJson(users);
+		//*/
+		return users;
+//		jsons = JsonConverter.usersToJson(users);
 		
-		return jsons;
+//		return jsons;
 	}
 	
 	public static String getSqlString(String name, String surname, Date lowerBdBound, Date upperBdBound, int lowerAgeBound,
@@ -103,7 +108,7 @@ public class DBSearch {
 		return sql;
 	}
 	
-	private static ResultSet innerSearch(String name, String surname, Date lowerBdBound, Date upperBdBound, int lowerAgeBound,
+	private static List<User> innerSearch(String name, String surname, Date lowerBdBound, Date upperBdBound, int lowerAgeBound,
 			int upperAgeBound, String type) throws SQLException {
 		
 		boolean[] options = {false, false, false, false, false};
@@ -144,8 +149,9 @@ public class DBSearch {
 		}
 		
 		ResultSet ret = statement.executeQuery();
+		List<User> users = resultsetToUsers(ret);
 		conn.close();
-		return ret;
+		return users;
 	}
 	
 	private static List<User> resultsetToUsers(ResultSet rs) throws SQLException {

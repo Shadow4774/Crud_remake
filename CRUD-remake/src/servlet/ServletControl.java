@@ -98,6 +98,10 @@ public class ServletControl extends HttpServlet {
 		case "json":
 			getJson(request, response);
 			break;
+
+		case "search":
+			search(request, response);
+			break;
 			
 		default:
 			forward(request, response, "/menu.jsp");
@@ -284,4 +288,9 @@ public class ServletControl extends HttpServlet {
 		return json;
 	}
 
+	private void search(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		List<User> result = DBSearch.search(request, response);
+		request.setAttribute("user", result);
+		forward(request, response, "/userFound.jsp");
+	}
 }
