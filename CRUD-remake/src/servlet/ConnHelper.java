@@ -15,7 +15,7 @@ public class ConnHelper {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SALVATORE", "0000");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "Marco", "marco");
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
