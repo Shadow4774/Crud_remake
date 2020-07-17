@@ -10,7 +10,6 @@ pageEncoding="ISO-8859-1"%>
 <div class='line'>
 
 
-
 <a class='words'>Home Page</a>
 <a class='words' href="ServletControl?op=list">List Users</a>
 <a class='words' href="newUser.jsp">Insert User</a>
@@ -23,7 +22,6 @@ java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy hh:mm");
 </h5>
 </div>
 </div>
-
 </div>
 
 </html>
