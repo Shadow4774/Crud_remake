@@ -101,18 +101,20 @@ public class DBActions {
 			throws SQLException {
 		boolean inserted=false;
 		String sql = "INSERT into crud_users (name, surname, birthdate, creationtimestamp, age, type) VALUES (?, ?, ?, ?, ?, ?)";
-		Connection conn = ConnHelper.getConnection();
-		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setString(1, name);
-		statement.setString(2, surname);
-		statement.setDate(3, birth);
-		statement.setTimestamp(4, now);
-		statement.setInt(5, age);
-		statement.setString(6, type);
+		try(Connection conn = ConnHelper.getConnection()) {
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, name);
+			statement.setString(2, surname);
+			statement.setDate(3, birth);
+			statement.setTimestamp(4, now);
+			statement.setInt(5, age);
+			statement.setString(6, type);
+			
+			inserted = statement.executeUpdate() > 0;
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
 		
-		inserted = statement.executeUpdate() > 0;
-		
-		conn.close();
 		return inserted;
 	}
 	
@@ -147,13 +149,16 @@ public class DBActions {
 	 */
 	private static boolean innerDeleteUser(int id) throws SQLException {
 		String sql = "DELETE FROM crud_users WHERE id = ?";
-		Connection conn = ConnHelper.getConnection();
-		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setInt(1, id);
+		boolean deleted = false;
+		try (Connection conn = ConnHelper.getConnection()){
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			
+			deleted = statement.executeUpdate() > 0;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
-		boolean deleted = statement.executeUpdate() > 0;
-		
-		conn.close();
 		return deleted;
 	}
 	
@@ -179,18 +184,21 @@ public class DBActions {
 			throws SQLException {
 		boolean inserted=false;
 		String sql = "UPDATE crud_users SET name = ?, surname = ?, birthdate = ?, age = ?, type = ? WHERE id = ?";
-		Connection conn = ConnHelper.getConnection();
-		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setString(1, name);
-		statement.setString(2, surname);
-		statement.setDate(3, birth);
-		statement.setInt(4, age);
-		statement.setString(5, type);
-		statement.setInt(6, id);
 		
-		inserted = statement.executeUpdate() > 0;
+		try (Connection conn = ConnHelper.getConnection()){
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, name);
+			statement.setString(2, surname);
+			statement.setDate(3, birth);
+			statement.setInt(4, age);
+			statement.setString(5, type);
+			statement.setInt(6, id);
+			
+			inserted = statement.executeUpdate() > 0;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
-		conn.close();
 		return inserted;
 	}
 	
@@ -207,21 +215,23 @@ public class DBActions {
 		Date bDate = null;
 		int id_i = 0, age = 0;
 		
-		Connection conn = ConnHelper.getConnection();
-		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setString(1, id);
-		ResultSet rs = statement.executeQuery();
-		
-		if(rs.next()) {
-			id_i = rs.getInt("id");
-			name = rs.getString("name");
-			surname = rs.getString("surname");
-			bDate = rs.getDate("birthdate");
-			type = User.charStrToEnum(rs.getString("type"));
-			age = getAge(bDate);
+		try (Connection conn = ConnHelper.getConnection()){
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, id);
+			ResultSet rs = statement.executeQuery();
+			
+			if(rs.next()) {
+				id_i = rs.getInt("id");
+				name = rs.getString("name");
+				surname = rs.getString("surname");
+				bDate = rs.getDate("birthdate");
+				type = User.charStrToEnum(rs.getString("type"));
+				age = getAge(bDate);
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
 		}
 		
-		conn.close();
 		return Optional.of(new User(id_i, name, surname, bDate, null, age, type));
 	}
 	
@@ -229,15 +239,17 @@ public class DBActions {
 		String sql = "SELECT username, password FROM crud_passwords WHERE username = ?";
 		String pass = "";
 		
-		Connection conn = ConnHelper.getConnection();
-		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setString(1, username);
-		ResultSet rs = statement.executeQuery();
+		try (Connection conn = ConnHelper.getConnection()){
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, username);
+			ResultSet rs = statement.executeQuery();
+			
+			if(rs.next())
+				pass = rs.getString("password");
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
 		
-		if(rs.next())
-			pass = rs.getString("password");
-		
-		conn.close();
 		return pass;
 	}
 	
@@ -260,21 +272,22 @@ public class DBActions {
 
 		if (!pwdTemp.equals(""))
 
-	
 			return false;
 		
 		String crypted = PasswordOps.crypt(password);
 		boolean inserted = false;
 		String sql = "INSERT into crud_passwords (username, password) VALUES (?, ?)";
 		
-		Connection conn = ConnHelper.getConnection();
-		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setString(1, username);
-		statement.setString(2, crypted);
+		try (Connection conn = ConnHelper.getConnection()){
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, username);
+			statement.setString(2, crypted);
+			
+			inserted = statement.executeUpdate() > 0;
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
 		
-		inserted = statement.executeUpdate() > 0;
-		
-		conn.close();
 		return inserted;
 	}
 	
@@ -290,20 +303,22 @@ public class DBActions {
 		int id = 0;
 //		int rows = 0;
 		
-		Connection conn = ConnHelper.getConnection();
-		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setString(1, name);
-		statement.setString(2, surname);
-		ResultSet rs = statement.executeQuery();
-		
-		while (rs.next()) {
-			if(id == 0)					//id == 0 is the starting situation (first line)
-				id = rs.getInt("id");
-			else						//id != 0 means that there are more than 1 record with same name/surname
-				id = -1;
+		try (Connection conn = ConnHelper.getConnection()){
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, name);
+			statement.setString(2, surname);
+			ResultSet rs = statement.executeQuery();
+			
+			while (rs.next()) {
+				if(id == 0)					//id == 0 is the starting situation (first line)
+					id = rs.getInt("id");
+				else						//id != 0 means that there are more than 1 record with same name/surname
+					id = -1;
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
 		}
 		
-		conn.close();
 		return id;						//0 = record not found, -1 = multiple records found, otherwise = id of user
 	}
 	

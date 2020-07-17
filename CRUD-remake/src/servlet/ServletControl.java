@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.RequestDispatcher;
@@ -96,12 +98,15 @@ public class ServletControl extends HttpServlet {
 			getJson(request, response);
 			break;
 
+		case "search":
+			search(request, response);
+			break;
+			
 		default:
 			forward(request, response, "/menu.jsp");
 			break;
 		}
 	}
-	
 	
 	/**
 	 * Inner forwarder for create new user to NewLogin page
@@ -199,6 +204,8 @@ public class ServletControl extends HttpServlet {
 		forward(request, response, "/listAll.jsp");
 	//response.sendRedirect("listAll.jsp");
 	}
+	
+	
 
 	private void insertLoginUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
@@ -281,4 +288,9 @@ public class ServletControl extends HttpServlet {
 		return json;
 	}
 
+	private void search(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		List<User> result = DBSearch.search(request, response);
+		request.setAttribute("user", result);
+		forward(request, response, "/userFound.jsp");
+	}
 }

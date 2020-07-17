@@ -3,12 +3,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <link href="css/listAllStyle.css" rel="stylesheet" type="text/css">
+
 <div class='mainBox'>
 
 	<div class='line'>
 
 		<a class='words' href="menu.jsp">Home Page</a> 
-		<a class='words'>List Users</a>
+		<a class='words'href="ServletControl?op=list">List Users</a>
 		<a class='words' href="newUser.jsp">Insert User</a>
 		<a class='words' href="Login.jsp">Logout</a>
 		<div class='date'>
@@ -20,15 +21,15 @@
 		</div>
 
 	</div>
-	
-    <div class='space'></div>
+<div class='space'></div>
 	<div class='space'>
 	<div>
 	<form method="get" action="searchPage.jsp">
-    <input class='btn' type="submit" value="Search" />
+    <input class='btn2' type="submit" value="Search Again" />
 	</form>
 	</div>
 	</div>
+	<div class='space'></div>
 
 						<table class='t'>
 
@@ -44,7 +45,7 @@
 		</tr>
 									
 								
-									<c:forEach items="${users}" var="user">
+									<c:forEach items="${user}" var="user">
 										
 										<tr>
 											
